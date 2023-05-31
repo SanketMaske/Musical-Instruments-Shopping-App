@@ -1,0 +1,35 @@
+package com.example.demo.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entities.Login;
+import com.example.demo.services.LoginService;
+import com.example.demo.services.UserService;
+
+@CrossOrigin(origins="http://localhost:3000")
+@RestController
+public class UserController {
+	
+	@Autowired
+	UserService uservice;
+	
+	@Autowired
+	LoginService lservice;
+	
+	@GetMapping("/getUser")
+	public Login getUser( @RequestParam("loginid") int loginid)
+	{
+		Login l=lservice.getById(loginid);
+		return uservice.getUser(l);
+		
+	}
+	
+
+
+}
